@@ -1,15 +1,16 @@
 import pygame
 import sys
+from models.Trash import Trash
 
 class Game:
     def __init__(self):
-        pass
+        self.trash = Trash()
         
     def update(self):
         pass
     
     def draw(self):
-        pass
+        self.trash.draw()
     
     def gameOver(self):
         pygame.quit()
