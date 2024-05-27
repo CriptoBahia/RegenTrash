@@ -1,5 +1,5 @@
 from settings.Game import Game
-from settings.Config import screen, pygame, clock, SCREEN_UPDATE
+from settings.Config import screen, pygame, clock, SCREEN_UPDATE, fps
 
 pygame.init()
 mainGame = Game()
@@ -13,5 +13,5 @@ while True:
             pass
     screen.fill((175,215,70))
     pygame.display.update()
-    clock.tick(60)
+    clock.tick(fps)
     
