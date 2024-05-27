@@ -11,6 +11,9 @@ class Game:
     
     def draw(self):
         self.trash.draw()
+        
+    def input(self, event):
+        self.trash.input(event)
     
     def gameOver(self):
         pygame.quit()
