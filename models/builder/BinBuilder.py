@@ -1,34 +1,36 @@
 from .Builder import Builder
-from ..Trash import Trash 
+from ..Bin import Bin 
 from ..Types import Type
 from pygame import Vector2
 import random
 import pygame
-from settings.Config import cellSize
+from settings.Config import cellSize, screenHeight, screenWidth
 
-class TrashBuilder(Builder):
+class BinBuilder(Builder):
 
     def __init__(self) -> None:
+        self._order = 0
         self.reset()
 
     def reset(self) -> None:
-        self._product = Trash()
+        self._product = Bin()
 
     @property
-    def product(self) -> Trash:
+    def product(self) -> Bin:
         product = self._product
         product.list_parts()
         self.reset()
         return product
 
     def produce_type(self) -> None:
-        self._product.add(random.choice(list(Type)))
+        self._product.add(Type(self._order+1))
         
     def produce_position(self) -> None:
-        self._product.add(Vector2(random.randrange(400, 600, 80), 0))
+        self._product.add(Vector2(screenWidth*(self._order*2+1)/10, screenHeight*4/5))
+        self._order+=1
     
     def produce_speed(self) -> None:
-        self._product.add(20)
+        self._product.add(0)
     
     def produce_sprite(self, sprite) -> None:
         pass
