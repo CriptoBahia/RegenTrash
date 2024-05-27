@@ -11,8 +11,8 @@ while True:
             mainGame.update()
         if event.type == pygame.KEYDOWN:
             mainGame.input(event.key)
+    screen.fill((175,215,70))
     mainGame.draw()
     pygame.display.update()
-    screen.fill((175,215,70))
     clock.tick(fps)
     

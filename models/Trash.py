@@ -23,3 +23,6 @@ class Trash:
                 self.position.x-=self.speed*2
             case pygame.K_RIGHT:
                 self.position.x+=self.speed*2
+                
+                
+    
