@@ -1,12 +1,19 @@
 import pygame, sys
 from models.Trash import Trash
-from models.Types import Type
 from models.Bin import Bin
+from models.Types import Type
+from models.builder.Director import Director
+from models.builder.TrashBuilder import TrashBuilder
 
 class Game:
     def __init__(self):
         self.trashes = []
-        self.currentTrash = Trash(Type.GLASS)
+        self.director = Director()
+        self.trashBuilder = TrashBuilder()
+        self.director.builder = self.trashBuilder
+        self.director.build_full_featured_product()
+        
+        self.currentTrash = self.trashBuilder.product
         self.trashes.append(self.currentTrash)
         self.bins = []
         self.score = 0
@@ -35,7 +42,7 @@ class Game:
     def checkCollision(self):
         if isinstance(self.currentTrash,Trash):
             for bin in self.bins:
-                if self.currentTrash.position.x == bin.position.x and self.currentTrash.position.y > bin.position.y:
+                if self.currentTrash.parts[1].x == bin.position.x and self.currentTrash.parts[1].x.y > bin.position.y:
                     point = bin.store(self.currentTrash)
                     if point>0:
                         self.trashes.remove(self.currentTrash)
