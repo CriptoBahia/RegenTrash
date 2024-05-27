@@ -1,13 +1,13 @@
-import pygame
-import sys
+import pygame, sys
 from models.Trash import Trash
+from models.Types import Type
 
 class Game:
     def __init__(self):
-        self.trash = Trash()
+        self.trash = Trash(Type.GLASS)
         
     def update(self):
-        pass
+        self.trash.move()
     
     def draw(self):
         self.trash.draw()

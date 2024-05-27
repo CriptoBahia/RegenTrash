@@ -3,10 +3,17 @@ from pygame.math import Vector2
 from settings.Config import cellSize, screen
 
 class Trash:
-    def __init__(self):
+    def __init__(self, type):
+        self.type = type
+        self.position = Vector2(400, 0)
+        self.speed = 40
+        self.sprite = 0
         self.surface = pygame.Surface((cellSize*1, cellSize*2))
        
         
     def draw(self):
         self.surface.fill((255,255,255))
-        screen.blit(self.surface, (400, 400))
+        screen.blit(self.surface, (self.position.x, self.position.y))
+        
+    def move(self):
+        self.position.y+=self.speed

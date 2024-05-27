@@ -8,7 +8,7 @@ while True:
         if event.type == pygame.QUIT:
             mainGame.gameOver()
         if event.type == SCREEN_UPDATE:
-            pass
+            mainGame.update()
         if event.type == pygame.KEYDOWN:
             pass
     mainGame.draw()
