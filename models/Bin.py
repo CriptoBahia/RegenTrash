@@ -13,7 +13,8 @@ class Bin:
     def draw(self):
         self.surface.fill((0,0,255))
         screen.blit(self.surface, (self.position.x, self.position.y))
-        
-                
-                
     
+    def store(self, trash):
+        trash.die()
+        del trash
+        return 10

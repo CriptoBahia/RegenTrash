@@ -11,8 +11,9 @@ class Trash:
         self.surface = pygame.Surface((cellSize*1, cellSize*1))
         
     def draw(self):
-        self.surface.fill((255,255,255))
-        screen.blit(self.surface, (self.position.x, self.position.y))
+        if isinstance(self, Trash):
+            self.surface.fill((255,255,255))
+            screen.blit(self.surface, (self.position.x, self.position.y))
         
     def move(self):
         self.position.y+=self.speed
@@ -23,6 +24,12 @@ class Trash:
                 self.position.x-=self.speed*2
             case pygame.K_RIGHT:
                 self.position.x+=self.speed*2
+    
+    def die(self):
+        self.surface = None  
+                
+    def __del__(self):
+        print("Deleted.")
                 
                 
     
