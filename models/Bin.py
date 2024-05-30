@@ -1,6 +1,4 @@
-import pygame, random
-from pygame.math import Vector2
-from settings.Config import cellSize, screen, screenHeight, screenWidth
+from settings.Config import SCREEN
 
 class Bin:
     
@@ -15,7 +13,7 @@ class Bin:
             print(i)
         
     def draw(self):
-        screen.blit(self.parts[3], (self.parts[1].x, self.parts[1].y))
+        SCREEN.blit(self.parts[3], (self.parts[1].x, self.parts[1].y))
     
     def store(self, trash) -> int:
         if trash.parts[0] == self.parts[0]:

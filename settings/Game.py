@@ -1,7 +1,5 @@
 import pygame, sys
 from models.Trash import Trash
-from models.Bin import Bin
-from models.Types import Type
 from models.builder.Director import Director
 from models.builder.TrashBuilder import TrashBuilder
 from models.builder.BinBuilder import BinBuilder
@@ -37,7 +35,7 @@ class Game:
             bin.draw()
         
     def input(self, eventType, eventKey):
-        if isinstance(self.currentTrash,Trash):
+        if self.currentTrash != None:
             self.currentTrash.input(eventType, eventKey)
     
     def gameOver(self):

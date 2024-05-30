@@ -1,6 +1,5 @@
-import pygame, random
-from pygame.math import Vector2
-from settings.Config import cellSize, screen
+import pygame
+from settings.Config import SCREEN
 
 class Trash:
     def __init__(self):
@@ -14,7 +13,7 @@ class Trash:
             print(i)
         
     def draw(self):
-        screen.blit(self.parts[3], (self.parts[1].x, self.parts[1].y))
+        SCREEN.blit(self.parts[3], (self.parts[1].x, self.parts[1].y))
         
     def input(self, eventType, eventKey):
         if eventType == pygame.KEYUP:

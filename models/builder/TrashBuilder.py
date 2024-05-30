@@ -4,7 +4,7 @@ from ..Types import Type
 from pygame import Vector2
 import random
 import pygame
-from settings.Config import cellSize
+from settings.Config import CELLSIZE
 
 LEFT_LIMIT = 320
 RIGHT_LIMIT = 580
@@ -38,7 +38,7 @@ class TrashBuilder(Builder):
         pass
         
     def produce_surface(self) -> None:
-        self._product.add(pygame.Surface((cellSize, cellSize)))
+        self._product.add(pygame.Surface((CELLSIZE, CELLSIZE)))
         match self._product.parts[0]:
             case Type.PAPER:
                 self._product.parts[3].fill(COLORS[0])

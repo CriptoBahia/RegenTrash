@@ -2,9 +2,8 @@ from .Builder import Builder
 from ..Bin import Bin 
 from ..Types import Type
 from pygame import Vector2
-import random
 import pygame
-from settings.Config import cellSize, screenHeight, screenWidth
+from settings.Config import CELLSIZE, SCREENHEIGHT, SCREENWIDTH
 
 SPEED = 0
 COLORS = [(0, 0, 255), (0, 255, 0), (255, 128, 0), (255, 255, 0), (128, 128, 128)]
@@ -28,7 +27,7 @@ class BinBuilder(Builder):
         self._product.add(Type(self.order+1))
         
     def produce_position(self) -> None:
-        self._product.add(Vector2(screenWidth*(self.order*2+1)/10, screenHeight*4/5))
+        self._product.add(Vector2(SCREENWIDTH*(self.order*2+1)/10, SCREENHEIGHT*4/5))
         self.order+=1
     
     def produce_speed(self) -> None:
@@ -38,7 +37,7 @@ class BinBuilder(Builder):
         pass
         
     def produce_surface(self) -> None:
-        self._product.add(pygame.Surface((cellSize, cellSize)))
+        self._product.add(pygame.Surface((CELLSIZE, CELLSIZE)))
         self._product.parts[3].fill(COLORS[self.order-1])
         
     def produce_direction(self) -> None:

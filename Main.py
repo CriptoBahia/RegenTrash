@@ -1,5 +1,5 @@
 from settings.Game import Game
-from settings.Config import screen, pygame, clock, SCREEN_UPDATE, fps
+from settings.Config import SCREEN, pygame, CLOCK, SCREEN_UPDATE, FPS
 
 pygame.init()
 mainGame = Game()
@@ -11,8 +11,8 @@ while True:
             mainGame.update()
         if event.type == pygame.KEYDOWN or event.type == pygame.KEYUP:
             mainGame.input(event.type, event.key)
-    screen.fill((175,215,70))
+    SCREEN.fill((175,215,70))
     mainGame.draw()
     pygame.display.update()
-    clock.tick(fps)
+    CLOCK.tick(FPS)
     
