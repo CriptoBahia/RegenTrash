@@ -15,7 +15,6 @@ class Bin:
             print(i)
         
     def draw(self):
-        self.parts[3].fill((0,0,255))
         screen.blit(self.parts[3], (self.parts[1].x, self.parts[1].y))
     
     def store(self, trash):
