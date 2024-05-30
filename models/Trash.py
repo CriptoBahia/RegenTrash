@@ -18,16 +18,23 @@ class Trash:
             self.parts[3].fill((255,255,255))
             screen.blit(self.parts[3], (self.parts[1].x, self.parts[1].y))
         
-    def move(self):
-        self.parts[1].y+=self.parts[2]
-        
-    def input(self,event):
-        match event:
-            case pygame.K_LEFT:
-                self.parts[1].x-=self.parts[2]*2
-            case pygame.K_RIGHT:
-                self.parts[1].x+=self.parts[2]*2
+    def input(self, eventType, eventKey):
+        if eventType == pygame.KEYUP:
+            self.parts[4].x = 0
+            self.parts[4].y = self.parts[2]
+        elif eventType == pygame.KEYDOWN:
+            match eventKey:
+                case pygame.K_LEFT:
+                    self.parts[4].x = -self.parts[2]*2
+                case pygame.K_RIGHT:
+                    self.parts[4].x = self.parts[2]*2
+                case pygame.K_DOWN:
+                    self.parts[4].y = self.parts[2]*2
     
+    def update(self):
+        self.parts[1].x += self.parts[4].x
+        self.parts[1].y += self.parts[4].y
+        
     def die(self):
         self.parts[3] = None  
                 

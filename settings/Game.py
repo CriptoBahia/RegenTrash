@@ -26,7 +26,7 @@ class Game:
             self.buildTrash()
         if self.checkList():
             for trash in self.trashes:
-                trash.move()
+                trash.update()
             self.checkCollision()
     
     def draw(self):
@@ -36,9 +36,9 @@ class Game:
         for bin in self.bins:
             bin.draw()
         
-    def input(self, event):
+    def input(self, eventType, eventKey):
         if isinstance(self.currentTrash,Trash):
-            self.currentTrash.input(event)
+            self.currentTrash.input(eventType, eventKey)
     
     def gameOver(self):
         pygame.quit()
@@ -57,18 +57,25 @@ class Game:
                     
                     
     def buildTrash(self) -> Trash:
-        self.director.builder = self.trashBuilder
-        self.director.build_full_featured_product()
-        newTrash = self.trashBuilder.product
-        self.trashes.append(newTrash)
-        self.last_build = pygame.time.get_ticks()
-        return newTrash
+        try:
+            self.director.builder = self.trashBuilder
+            self.director.build_full_featured_product()
+        except:
+            print("trash build failed.")
+        else:
+            newTrash = self.trashBuilder.product
+            self.trashes.append(newTrash)
+            self.last_build = pygame.time.get_ticks()
+            return newTrash
         
     def buildBins(self) -> None:
-        self.director.builder = self.binBuilder
-        for i in range(0,5):
-            self.director.build_full_featured_product()
-            self.bins.append(self.binBuilder.product)
+        try:
+            self.director.builder = self.binBuilder
+            for i in range(0,5):
+                self.director.build_full_featured_product()
+                self.bins.append(self.binBuilder.product)
+        except:
+            print("bin build failed.")
             
     def checkList(self) -> bool:
         if len(self.trashes) > 0:

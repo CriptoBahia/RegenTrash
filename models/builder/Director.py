@@ -31,4 +31,5 @@ class Director:
         self.builder.produce_position()
         self.builder.produce_speed()
         self.builder.produce_surface()
+        self.builder.produce_direction()
          

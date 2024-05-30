@@ -34,3 +34,7 @@ class Builder(ABC):
     @abstractmethod
     def produce_surface(self) -> None:
         pass
+    
+    @abstractmethod
+    def produce_direction(self) -> None:
+        pass

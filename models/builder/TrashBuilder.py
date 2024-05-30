@@ -6,6 +6,11 @@ import random
 import pygame
 from settings.Config import cellSize
 
+LEFT_LIMIT = 320
+RIGHT_LIMIT = 580
+SPEED = 20
+DIRECTION = (0, SPEED)
+
 class TrashBuilder(Builder):
 
     def __init__(self) -> None:
@@ -24,13 +29,15 @@ class TrashBuilder(Builder):
         self._product.add(random.choice(list(Type)))
         
     def produce_position(self) -> None:
-        self._product.add(Vector2(random.randrange(400, 600, 80), 0))
+        self._product.add(Vector2(random.randrange(LEFT_LIMIT, RIGHT_LIMIT, 80), 0))
     
     def produce_speed(self) -> None:
-        self._product.add(20)
-    
+        self._product.add(SPEED)
     def produce_sprite(self, sprite) -> None:
         pass
         
     def produce_surface(self) -> None:
-        self._product.add(pygame.Surface((cellSize*1, cellSize*1))) 
+        self._product.add(pygame.Surface((cellSize, cellSize))) 
+        
+    def produce_direction(self) -> None:
+        self._product.add(Vector2(DIRECTION))

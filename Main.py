@@ -9,8 +9,8 @@ while True:
             mainGame.gameOver()
         if event.type == SCREEN_UPDATE:
             mainGame.update()
-        if event.type == pygame.KEYDOWN:
-            mainGame.input(event.key)
+        if event.type == pygame.KEYDOWN or event.type == pygame.KEYUP:
+            mainGame.input(event.type, event.key)
     screen.fill((175,215,70))
     mainGame.draw()
     pygame.display.update()

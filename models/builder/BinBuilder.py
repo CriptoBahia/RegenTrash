@@ -6,11 +6,13 @@ import random
 import pygame
 from settings.Config import cellSize, screenHeight, screenWidth
 
+SPEED = 0
+COLORS = [(0, 0, 255), (0, 255, 0), (255, 128, 0), (255, 255, 0), (128, 128, 128)]
+
 class BinBuilder(Builder):
 
     def __init__(self) -> None:
         self.order = 0
-        self.colors = [(0, 0, 255), (0, 255, 0), (255, 128, 0), (255, 255, 0), (128, 128, 128)]
         self.reset()
 
     def reset(self) -> None:
@@ -30,11 +32,14 @@ class BinBuilder(Builder):
         self.order+=1
     
     def produce_speed(self) -> None:
-        self._product.add(0)
+        self._product.add(SPEED)
     
     def produce_sprite(self, sprite) -> None:
         pass
         
     def produce_surface(self) -> None:
-        self._product.add(pygame.Surface((cellSize*1, cellSize*1)))
-        self._product.parts[3].fill(self.colors[self.order-1])
+        self._product.add(pygame.Surface((cellSize, cellSize)))
+        self._product.parts[3].fill(COLORS[self.order-1])
+        
+    def produce_direction(self) -> None:
+        pass
