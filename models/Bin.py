@@ -1,20 +1,24 @@
-import pygame, random
-from pygame.math import Vector2
-from settings.Config import cellSize, screen, screenHeight, screenWidth
+from settings.Config import SCREEN
 
 class Bin:
-    def __init__(self, type, order):
-        self.type = type
-        self.position = Vector2(screenWidth*(order*2+1)/10, screenHeight*4/5)
-        self.speed = 0
-        self.sprite = 0
-        self.surface = pygame.Surface((cellSize*1, cellSize*1))
+    
+    def __init__(self):
+        self.parts = []   
+        
+    def add(self, part: any) -> None:
+        self.parts.append(part)
+    
+    def list_parts(self) -> None:
+        for i in self.parts:
+            print(i)
         
     def draw(self):
-        self.surface.fill((0,0,255))
-        screen.blit(self.surface, (self.position.x, self.position.y))
+        SCREEN.blit(self.parts[3], (self.parts[1].x, self.parts[1].y))
     
-    def store(self, trash):
+    def store(self, trash) -> int:
+        if trash.parts[0] == self.parts[0]:
+            score = 10
+        else:
+            score = -10
         trash.die()
-        del trash
-        return 10
+        return score
