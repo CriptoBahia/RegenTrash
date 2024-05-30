@@ -14,9 +14,7 @@ class Trash:
             print(i)
         
     def draw(self):
-        if isinstance(self, Trash):
-            self.parts[3].fill((255,255,255))
-            screen.blit(self.parts[3], (self.parts[1].x, self.parts[1].y))
+        screen.blit(self.parts[3], (self.parts[1].x, self.parts[1].y))
         
     def input(self, eventType, eventKey):
         if eventType == pygame.KEYUP:
@@ -37,6 +35,7 @@ class Trash:
         
     def die(self):
         self.parts[3] = None  
+        del self
                 
     def __del__(self):
         print("Deleted.")

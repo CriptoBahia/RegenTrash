@@ -10,6 +10,7 @@ LEFT_LIMIT = 320
 RIGHT_LIMIT = 580
 SPEED = 20
 DIRECTION = (0, SPEED)
+COLORS = [(0, 0, 255), (0, 255, 0), (255, 128, 0), (255, 255, 0), (128, 128, 128)]
 
 class TrashBuilder(Builder):
 
@@ -37,7 +38,18 @@ class TrashBuilder(Builder):
         pass
         
     def produce_surface(self) -> None:
-        self._product.add(pygame.Surface((cellSize, cellSize))) 
+        self._product.add(pygame.Surface((cellSize, cellSize)))
+        match self._product.parts[0]:
+            case Type.PAPER:
+                self._product.parts[3].fill(COLORS[0])
+            case Type.GLASS:
+                self._product.parts[3].fill(COLORS[1])
+            case Type.PLASTIC:
+                self._product.parts[3].fill(COLORS[2])
+            case Type.METAL:
+                self._product.parts[3].fill(COLORS[3])
+            case Type.ORGANIC:
+                self._product.parts[3].fill(COLORS[4])
         
     def produce_direction(self) -> None:
         self._product.add(Vector2(DIRECTION))

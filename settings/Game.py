@@ -7,7 +7,7 @@ from models.builder.TrashBuilder import TrashBuilder
 from models.builder.BinBuilder import BinBuilder
 
 
-DELAY = 2000
+DELAY = 3000
 
 class Game:
     def __init__(self):
@@ -45,15 +45,17 @@ class Game:
         sys.exit()
         
     def checkCollision(self):
+        if self.currentTrash != None:
             for bin in self.bins:
                 if self.currentTrash.parts[1].x == bin.parts[1].x and self.currentTrash.parts[1].y > bin.parts[1].y:
-                    point = bin.store(self.currentTrash)
-                    if point>0:
-                        self.trashes.remove(self.currentTrash)
-                        self.currentTrash = self.nextTrash()
-                        self.score += point
-                        print(self.score)
-                        break
+                    print(self.currentTrash)
+                    print("bin", bin)
+                    print("Position: ", self.currentTrash.parts[1].x, self.currentTrash.parts[1].y)
+                    self.score += bin.store(self.currentTrash)
+                    self.trashes.remove(self.currentTrash)
+                    self.currentTrash = None
+                    print(self.score)
+                    break
                     
                     
     def buildTrash(self) -> Trash:
@@ -79,6 +81,8 @@ class Game:
             
     def checkList(self) -> bool:
         if len(self.trashes) > 0:
+            if self.currentTrash == None or len(self.currentTrash.parts) ==0:
+                self.currentTrash = self.nextTrash()
             return True
         return False
                     
