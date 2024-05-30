@@ -19,7 +19,6 @@ class BinBuilder(Builder):
     @property
     def product(self) -> Bin:
         product = self._product
-        product.list_parts()
         self.reset()
         return product
 
@@ -38,5 +37,4 @@ class BinBuilder(Builder):
         
     def produce_surface(self) -> None:
         self._product.add(pygame.Surface((cellSize*1, cellSize*1)))
-        print("order:", self.order)
         self._product.parts[3].fill(self.colors[self.order-1])

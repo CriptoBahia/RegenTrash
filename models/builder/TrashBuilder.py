@@ -17,7 +17,6 @@ class TrashBuilder(Builder):
     @property
     def product(self) -> Trash:
         product = self._product
-        product.list_parts()
         self.reset()
         return product
 
