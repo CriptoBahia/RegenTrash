@@ -34,5 +34,9 @@ class Builder(ABC):
         pass
     
     @abstractmethod
+    def produce_rect(self) -> None:
+        pass
+    
+    @abstractmethod
     def produce_direction(self) -> None:
         pass

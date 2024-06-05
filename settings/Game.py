@@ -46,7 +46,7 @@ class Game:
     def checkCollision(self):
         if self.currentTrash != None:
             for bin in self.bins:
-                if self.currentTrash.parts[1].x == bin.parts[1].x and self.currentTrash.parts[1].y > bin.parts[1].y:
+                if bin.parts[4].colliderect(self.currentTrash.parts[4]):
                     self.score += bin.store(self.currentTrash)
                     self.trashes.remove(self.currentTrash)
                     self.currentTrash = None

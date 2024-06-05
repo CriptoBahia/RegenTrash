@@ -15,6 +15,8 @@ COLORS = [(0, 0, 255), (0, 255, 0), (255, 128, 0), (255, 255, 0), (128, 128, 128
 class TrashBuilder(Builder):
 
     def __init__(self) -> None:
+        self.trashX = random.randrange(LEFT_LIMIT, RIGHT_LIMIT, 40)
+        self.trashY = 0
         self.reset()
 
     def reset(self) -> None:
@@ -30,7 +32,7 @@ class TrashBuilder(Builder):
         self._product.add(random.choice(list(Type)))
         
     def produce_position(self) -> None:
-        self._product.add(Vector2(random.randrange(LEFT_LIMIT, RIGHT_LIMIT, 40), 0))
+        self._product.add(Vector2(self.trashX, self.trashY))
     
     def produce_speed(self) -> None:
         self._product.add(SPEED)
@@ -51,5 +53,8 @@ class TrashBuilder(Builder):
             case Type.ORGANIC:
                 self._product.parts[3].fill(COLORS[4])
         
+    def produce_rect(self) -> None:
+        self._product.add(self._product.parts[3].get_rect(center=(self.trashX,self.trashY)))
+    
     def produce_direction(self) -> None:
         self._product.add(Vector2(DIRECTION))

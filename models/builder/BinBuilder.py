@@ -12,6 +12,7 @@ class BinBuilder(Builder):
 
     def __init__(self) -> None:
         self.order = 0
+        
         self.reset()
 
     def reset(self) -> None:
@@ -27,7 +28,9 @@ class BinBuilder(Builder):
         self._product.add(Type(self.order+1))
         
     def produce_position(self) -> None:
-        self._product.add(Vector2(SCREENWIDTH*2/5+(self.order*80 - 80), SCREENHEIGHT*4/5))
+        self.binX = SCREENWIDTH*2/5+(self.order*80 - 80)
+        self.binY = SCREENHEIGHT*4/5
+        self._product.add(Vector2(self.binX, self.binY))
         self.order+=1
     
     def produce_speed(self) -> None:
@@ -39,6 +42,9 @@ class BinBuilder(Builder):
     def produce_surface(self) -> None:
         self._product.add(pygame.Surface((CELLSIZE, CELLSIZE)))
         self._product.parts[3].fill(COLORS[self.order-1])
-        
+    
+    def produce_rect(self) -> None:
+        self._product.add(self._product.parts[3].get_rect(center=(self.binX, self.binY)))
+    
     def produce_direction(self) -> None:
         pass
