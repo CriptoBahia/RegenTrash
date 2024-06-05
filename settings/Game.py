@@ -51,6 +51,11 @@ class Game:
                     self.trashes.remove(self.currentTrash)
                     self.currentTrash = None
                     break
+            if self.currentTrash.parts[1].y >= SCREENHEIGHT:
+                self.score += -100
+                self.currentTrash.die()
+                self.trashes.remove(self.currentTrash)
+                self.currentTrash = None
                   
     def drawScore(self):
         scoreFont = pygame.font.SysFont("comicsansms", 30)
