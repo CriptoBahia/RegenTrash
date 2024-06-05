@@ -3,7 +3,7 @@ from models.Trash import Trash
 from models.builder.Director import Director
 from models.builder.TrashBuilder import TrashBuilder
 from models.builder.BinBuilder import BinBuilder
-
+from settings.Config import SCREEN, SCREENHEIGHT, SCREENWIDTH
 
 DELAY = 3000
 
@@ -33,12 +33,12 @@ class Game:
                 trash.draw()
         for bin in self.bins:
             bin.draw()
+        self.drawScore()
         
     def input(self, eventType, keys):
         if self.currentTrash != None:
             self.currentTrash.input(eventType, keys)
-        
-    
+         
     def gameOver(self):
         pygame.quit()
         sys.exit()
@@ -47,15 +47,17 @@ class Game:
         if self.currentTrash != None:
             for bin in self.bins:
                 if self.currentTrash.parts[1].x == bin.parts[1].x and self.currentTrash.parts[1].y > bin.parts[1].y:
-                    print(self.currentTrash)
-                    print("bin", bin)
-                    print("Position: ", self.currentTrash.parts[1].x, self.currentTrash.parts[1].y)
                     self.score += bin.store(self.currentTrash)
                     self.trashes.remove(self.currentTrash)
                     self.currentTrash = None
-                    print(self.score)
                     break
-                    
+                  
+    def drawScore(self):
+        scoreFont = pygame.font.SysFont("comicsansms", 30)
+        scoreSufarce = scoreFont.render(str(self.score), True, (0,0,0))
+        scoreRect = scoreSufarce.get_rect()
+        scoreRect.topright = ((SCREENWIDTH), (0))
+        SCREEN.blit(scoreSufarce, scoreRect)  
                     
     def buildTrash(self) -> Trash:
         try:

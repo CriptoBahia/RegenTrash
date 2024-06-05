@@ -36,9 +36,3 @@ class Trash:
     def die(self):
         self.parts[3] = None  
         del self
-                
-    def __del__(self):
-        print("Deleted.")
-                
-                
-    
