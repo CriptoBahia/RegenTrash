@@ -34,9 +34,10 @@ class Game:
         for bin in self.bins:
             bin.draw()
         
-    def input(self, eventType, eventKey):
+    def input(self, eventType, keys):
         if self.currentTrash != None:
-            self.currentTrash.input(eventType, eventKey)
+            self.currentTrash.input(eventType, keys)
+        
     
     def gameOver(self):
         pygame.quit()
