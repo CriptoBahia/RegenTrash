@@ -15,18 +15,17 @@ class Trash:
     def draw(self):
         SCREEN.blit(self.parts[3], (self.parts[1].x, self.parts[1].y))
         
-    def input(self, eventType, eventKey):
+    def input(self, eventType, keys):
         if eventType == pygame.KEYUP:
             self.parts[4].x = 0
             self.parts[4].y = self.parts[2]
         elif eventType == pygame.KEYDOWN:
-            match eventKey:
-                case pygame.K_LEFT:
-                    self.parts[4].x = -self.parts[2]*2
-                case pygame.K_RIGHT:
-                    self.parts[4].x = self.parts[2]*2
-                case pygame.K_DOWN:
-                    self.parts[4].y = self.parts[2]*2
+            if keys[pygame.K_LEFT]:
+                self.parts[4].x = -self.parts[2]*2
+            if keys[pygame.K_RIGHT]:
+                self.parts[4].x = self.parts[2]*2
+            if keys[pygame.K_DOWN]:
+                self.parts[4].y = self.parts[2]*2
     
     def update(self):
         self.parts[1].x += self.parts[4].x
