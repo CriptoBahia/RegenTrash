@@ -38,8 +38,6 @@ class TrashBuilder(Builder):
         self._product.add(SPEED)
     def produce_sprite(self) -> None:
         path = "models/sprites/trashes/"+self._product.parts[0].name+".png"
-        print(path)
-        print(pygame.image.load(path).convert_alpha())
         self._product.add(pygame.image.load(path).convert_alpha())
         
     def produce_surface(self) -> None:

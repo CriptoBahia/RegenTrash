@@ -38,8 +38,6 @@ class BinBuilder(Builder):
     
     def produce_sprite(self) -> None:
         path = "models/sprites/bins/"+self._product.parts[0].name+"_reciclying_bin.png"
-        print(path)
-        print(pygame.image.load(path).convert_alpha())
         self._product.add(pygame.image.load(path).convert_alpha())
         
     def produce_surface(self) -> None:
