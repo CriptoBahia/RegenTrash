@@ -9,7 +9,7 @@ DELAY = 3000
 
 class Game:
     def __init__(self):
-        self.last_build = None
+        self.last_build = 0
         self.trashes = []
         self.bins = []
         self.director = Director()
@@ -50,12 +50,13 @@ class Game:
                     self.score += bin.store(self.currentTrash)
                     self.trashes.remove(self.currentTrash)
                     self.currentTrash = None
-                    break
-            if self.currentTrash.parts[1].y >= SCREENHEIGHT:
+                    return 
+            if self.currentTrash.parts[1].y > SCREENHEIGHT:
                 self.score += -100
                 self.currentTrash.die()
                 self.trashes.remove(self.currentTrash)
                 self.currentTrash = None
+                return
                   
     def drawScore(self):
         scoreFont = pygame.font.SysFont("comicsansms", 30)

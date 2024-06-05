@@ -3,7 +3,7 @@ from ..Bin import Bin
 from ..Types import Type
 from pygame import Vector2
 import pygame
-from settings.Config import CELLSIZE, SCREENHEIGHT, SCREENWIDTH
+from settings.Config import SCREENHEIGHT, SCREENWIDTH
 
 SPEED = 0
 COLORS = [(0, 0, 255), (0, 255, 0), (255, 128, 0), (255, 255, 0), (128, 128, 128)]
@@ -36,12 +36,16 @@ class BinBuilder(Builder):
     def produce_speed(self) -> None:
         self._product.add(SPEED)
     
-    def produce_sprite(self, sprite) -> None:
-        pass
+    def produce_sprite(self) -> None:
+        path = "models/sprites/bins/"+self._product.parts[0].name+"_reciclying_bin.png"
+        print(path)
+        print(pygame.image.load(path).convert_alpha())
+        self._product.add(pygame.image.load(path).convert_alpha())
         
     def produce_surface(self) -> None:
-        self._product.add(pygame.Surface((CELLSIZE, CELLSIZE)))
-        self._product.parts[3].fill(COLORS[self.order-1])
+        pass
+        #self._product.add(pygame.Surface((CELLSIZE, CELLSIZE)))
+        #self._product.parts[3].fill(COLORS[self.order-1])
     
     def produce_rect(self) -> None:
         self._product.add(self._product.parts[3].get_rect(center=(self.binX, self.binY)))
