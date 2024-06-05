@@ -27,7 +27,7 @@ class BinBuilder(Builder):
         self._product.add(Type(self.order+1))
         
     def produce_position(self) -> None:
-        self._product.add(Vector2(SCREENWIDTH*(self.order*2+1)/10, SCREENHEIGHT*4/5))
+        self._product.add(Vector2(SCREENWIDTH*2/5+(self.order*80 - 80), SCREENHEIGHT*4/5))
         self.order+=1
     
     def produce_speed(self) -> None:
