@@ -26,6 +26,8 @@ class Trash:
                 self.parts[4].x = self.parts[2]*2
             if keys[pygame.K_DOWN]:
                 self.parts[4].y = self.parts[2]*2
+            if keys[pygame.K_UP]:
+                self.parts[4].y = self.parts[2]/2
     
     def update(self):
         self.parts[1].x += self.parts[4].x
