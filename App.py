@@ -1,10 +1,21 @@
 from settings.Game import Game
-from settings.States import State
-from settings.Config import SCREEN, pygame, CLOCK, SCREEN_UPDATE, FPS, SCREENHEIGHT, SCREENWIDTH
+from settings.State import State
+from settings.Config import Config, pygame
+from settings.Resolution import Resolution
 
 gameState = State.RUNNING
+
 pygame.init()
+SCREEN_UPDATE = pygame.USEREVENT
+pygame.time.set_timer(SCREEN_UPDATE,150)
+CLOCK = pygame.time.Clock()
+FPS = 60
+
+config = Config()
+config.resolution = Resolution.HD
+config.apply()
 mainGame = Game()
+
 
 def run(eventType):
     if eventType == pygame.KEYDOWN or eventType == pygame.KEYUP:
@@ -13,7 +24,7 @@ def run(eventType):
                 return State.PAUSED
         else:
             mainGame.input(eventType, keys)
-    SCREEN.fill((175,215,70))
+    config.screen.fill((175,215,70))
     mainGame.draw()
     return State.RUNNING
 
@@ -25,8 +36,8 @@ def pause(eventType):
     largeText = pygame.font.SysFont("comicsansms",115)
     textSurface = largeText.render("Paused", True, (0,0,0))
     TextRect = textSurface.get_rect()
-    TextRect.center = ((SCREENWIDTH/2),(SCREENHEIGHT/2))
-    SCREEN.blit(textSurface, TextRect)
+    TextRect.center = ((config.screenWidth/2),(config.screenheight/2))
+    config.screen.blit(textSurface, TextRect)
     mainGame.last_build = pygame.time.get_ticks()
     return State.PAUSED
     

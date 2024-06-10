@@ -1,5 +1,5 @@
 import pygame
-from settings.Config import SCREEN
+from settings.Config import screen
 
 class Trash:
     def __init__(self):
@@ -13,7 +13,7 @@ class Trash:
             print(i)
         
     def draw(self):
-        SCREEN.blit(self.parts[3], (self.parts[1].x, self.parts[1].y))
+        screen.blit(self.parts[3], (self.parts[1].x, self.parts[1].y))
         
     def input(self, eventType, keys):
         if eventType == pygame.KEYUP:

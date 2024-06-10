@@ -1,6 +1,6 @@
 from .Builder import Builder
 from ..Bin import Bin 
-from ..Types import Type
+from ..Type import Type
 from pygame import Vector2
 import pygame
 from settings.Config import SCREENHEIGHT, SCREENWIDTH
