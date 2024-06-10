@@ -1,45 +1,40 @@
 import pygame
 from .Resolution import Resolution
 
-SCREEN = screen
-
 class Config:
-    def __init__(self) -> None:
-        self.screen = None
-        self.screenWidth = None
-        self.screenheight = None
-        self.XCELLNUMBER = 20
-        self.YCELLNUMBER = 12
-        self._resolution = None
-        pass
+    def __init__(self, resolution: Resolution) -> None:
+        self._XCELLNUMBER = 20
+        self._YCELLNUMBER = 12 
+        self.setResolution(resolution)
     
     @property
-    def resolution(self) -> Resolution:
-        return self._resolution
-
-    @resolution.setter
-    def resolution(self, resolution= Resolution.HD) -> None:
+    def surface(self) -> pygame.Surface:
+        return self._surface
+    
+    @property
+    def cellSize(self) -> int:
+        return self._cellSize
+    @cellSize.setter
+    def cellSize(self, cellSize: int):
+        self._cellSize = cellSize
+        
+    def setResolution(self, resolution: Resolution) -> None:
         match resolution:
             case Resolution.VGA:
-                self.cellSize = 32
+                self._cellSize = 32
             case Resolution.SVGA:
-                self.cellSize = 40
+                self._cellSize = 40
             case Resolution.XGA:
-                self.cellSize = 51
+                self._cellSize = 51
             case Resolution.HD:
-                self.cellSize = 64
-            case Resolution.HD:
-                self.cellSize = 96    
-        self._resolution = resolution
-        global SCREENWIDTH
-        global SCREENHEIGHT
-        SCREENWIDTH = self.cellSize*self.XCELLNUMBER
-        self.screenWidth = SCREENWIDTH
-        SCREENHEIGHT= self.cellSize*self.YCELLNUMBER
-        self.screenheight = SCREENHEIGHT
+                self._cellSize = 64
+            case Resolution.FULLHD:
+                self._cellSize = 96   
+            case _:
+                self._cellSize = 51
+        surfaceWidth =self._cellSize*self._XCELLNUMBER
+        surfaceheight= self._cellSize*self._YCELLNUMBER
+        self._surface = pygame.display.set_mode((surfaceWidth, surfaceheight))
         
-    def apply(self):
-        global screen 
-        screen = pygame.display.set_mode((SCREENWIDTH, SCREENHEIGHT))
-        self.screen = screen
+        
         

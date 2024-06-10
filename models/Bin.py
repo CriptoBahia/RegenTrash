@@ -1,9 +1,9 @@
-from settings.Config import SCREEN
 
 class Bin:
     
-    def __init__(self):
+    def __init__(self, surface):
         self.parts = []   
+        self._surface = surface
         
     def add(self, part: any) -> None:
         self.parts.append(part)
@@ -13,7 +13,7 @@ class Bin:
             print(i)
         
     def draw(self):
-        SCREEN.blit(self.parts[3], (self.parts[1].x, self.parts[1].y))
+        self._surface.blit(self.parts[2], (self.parts[1].x, self.parts[1].y))
     
     def store(self, trash) -> int:
         if trash.parts[0] == self.parts[0]:

@@ -3,18 +3,20 @@ from models.Trash import Trash
 from models.builder.Director import Director
 from models.builder.TrashBuilder import TrashBuilder
 from models.builder.BinBuilder import BinBuilder
-from settings.Config import SCREEN, SCREENHEIGHT, SCREENWIDTH
+from .Screen import Screen
+from .Config import Config
 
 DELAY = 3000
 
-class Game:
-    def __init__(self):
+class Game(Screen):
+    def __init__(self, config: Config):
+        super().__init__(config)
         self.last_build = 0
         self.trashes = []
         self.bins = []
         self.director = Director()
-        self.trashBuilder = TrashBuilder()
-        self.binBuilder = BinBuilder()
+        self.trashBuilder = TrashBuilder(self.surface, self.cellSize)
+        self.binBuilder = BinBuilder(self.surface, self.cellSize)
         self.buildBins()
         self.currentTrash = self.buildTrash()
         self.score = 0
@@ -46,12 +48,12 @@ class Game:
     def checkCollision(self):
         if self.currentTrash != None:
             for bin in self.bins:
-                if bin.parts[4].colliderect(self.currentTrash.parts[4]):
+                if bin.parts[3].colliderect(self.currentTrash.parts[4]):
                     self.score += bin.store(self.currentTrash)
                     self.trashes.remove(self.currentTrash)
                     self.currentTrash = None
                     return 
-            if self.currentTrash.parts[1].y > SCREENHEIGHT:
+            if self.currentTrash.parts[1].y > self.surface.get_height():
                 self.score += -100
                 self.currentTrash.die()
                 self.trashes.remove(self.currentTrash)
@@ -62,29 +64,22 @@ class Game:
         scoreFont = pygame.font.SysFont("comicsansms", 30)
         scoreSufarce = scoreFont.render(str(self.score), True, (0,0,0))
         scoreRect = scoreSufarce.get_rect()
-        scoreRect.topright = ((SCREENWIDTH), (0))
-        SCREEN.blit(scoreSufarce, scoreRect)  
+        scoreRect.topright = ((self.surface.get_width()), (0))
+        self.surface.blit(scoreSufarce, scoreRect)  
                     
     def buildTrash(self) -> Trash:
-        try:
-            self.director.builder = self.trashBuilder
-            self.director.build_full_featured_product()
-        except:
-            print("trash build failed.")
-        else:
-            newTrash = self.trashBuilder.product
-            self.trashes.append(newTrash)
-            self.last_build = pygame.time.get_ticks()
-            return newTrash
+        self.director.builder = self.trashBuilder
+        self.director.build_full_featured_product()
+        newTrash = self.trashBuilder.product
+        self.trashes.append(newTrash)
+        self.last_build = pygame.time.get_ticks()
+        return newTrash
         
     def buildBins(self) -> None:
-        try:
-            self.director.builder = self.binBuilder
-            for i in range(0,5):
-                self.director.build_full_featured_product()
-                self.bins.append(self.binBuilder.product)
-        except:
-            print("bin build failed.")
+        self.director.builder = self.binBuilder
+        for i in range(0,4):
+            self.director.build_full_featured_product()
+            self.bins.append(self.binBuilder.product)
             
     def checkList(self) -> bool:
         if len(self.trashes) > 0:

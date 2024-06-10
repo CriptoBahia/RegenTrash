@@ -30,10 +30,6 @@ class Builder(ABC):
         pass
     
     @abstractmethod
-    def produce_surface(self) -> None:
-        pass
-    
-    @abstractmethod
     def produce_rect(self) -> None:
         pass
     

@@ -11,10 +11,8 @@ pygame.time.set_timer(SCREEN_UPDATE,150)
 CLOCK = pygame.time.Clock()
 FPS = 60
 
-config = Config()
-config.resolution = Resolution.HD
-config.apply()
-mainGame = Game()
+config = Config(Resolution.SVGA)
+mainGame = Game(config)
 
 
 def run(eventType):
@@ -24,7 +22,7 @@ def run(eventType):
                 return State.PAUSED
         else:
             mainGame.input(eventType, keys)
-    config.screen.fill((175,215,70))
+    mainGame.surface.fill((175,215,70))
     mainGame.draw()
     return State.RUNNING
 
@@ -52,6 +50,7 @@ while True:
                 case State.RUNNING:
                     gameState = run(event.type)
                 case State.PAUSED:
-                    gameState = pause(event.type)
+                    #gameState = pause(event.type)
+                    pass
     pygame.display.update()
     CLOCK.tick(FPS)
