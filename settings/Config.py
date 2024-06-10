@@ -34,7 +34,7 @@ class Config:
                 self._cellSize = 51
         surfaceWidth =self._cellSize*self._XCELLNUMBER
         surfaceheight= self._cellSize*self._YCELLNUMBER
-        self._surface = pygame.display.set_mode((surfaceWidth, surfaceheight))
+        self._surface = pygame.display.set_mode((surfaceWidth, surfaceheight), pygame.FULLSCREEN)
         
         
         

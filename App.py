@@ -11,7 +11,7 @@ pygame.time.set_timer(SCREEN_UPDATE,150)
 CLOCK = pygame.time.Clock()
 FPS = 60
 
-config = Config(Resolution.SVGA)
+config = Config(Resolution.HD)
 mainGame = Game(config)
 
 
